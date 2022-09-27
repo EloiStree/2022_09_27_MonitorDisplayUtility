@@ -20,6 +20,7 @@ public class FetchScreenWithVRDesktopMirrorMono : MonoBehaviour
     public IEnumerator Start()
     {
         yield return FetchScreenWithVRDesktopMirror.I.Start();
+        StartCoroutine(OnRender());
         for (int i = 0; i < FetchScreenWithVRDesktopMirror.I.m_displayCount; i++)
         {
             if (i < m_displayAsTexture.Length)
@@ -85,11 +86,12 @@ public class FetchScreenWithVRDesktopMirror
 
     public IEnumerator Start()
     {
+        DesktopCapturePlugin_Initialize();
         yield return new WaitForSeconds(1);
         {
             m_displayCount = DesktopCapturePlugin_GetNDesks();
             m_isMouseInScreen = new bool[m_displayCount];
-            DesktopCapturePlugin_Initialize();
+            DesktopCapturePlugin_Initialize();  
             m_screenTexture = new Texture2D[m_displayCount];
             for (int i = 0; i < m_displayCount; i++)
             {
@@ -103,6 +105,7 @@ public class FetchScreenWithVRDesktopMirror
             if(m_onChangedValue!=null)
                 m_onChangedValue.Invoke();
         }
+        //        StartCoroutine(OnRender());
     }
     
     public IEnumerator OnRender()

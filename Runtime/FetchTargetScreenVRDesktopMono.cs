@@ -19,6 +19,7 @@ public class FetchTargetScreenVRDesktopMono : MonoBehaviour
     {
         m_debugTextureView= FetchScreenWithVRDesktopMirror.I.GetTextureWithId(m_index);
         m_onTextureChanged.Invoke(m_debugTextureView);
+        if(m_toAffectMaterial)
         m_toAffectMaterial.mainTexture= (m_debugTextureView);
     }
 
